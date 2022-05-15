@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,10 +25,20 @@ public class StartingScreenActivity extends AppCompatActivity {
 
     private int highscore;
 
+    Button button_start_wordle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting_screen);
+
+        button_start_wordle = findViewById(R.id.button_start_wordle);
+        button_start_wordle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goLink("https://www.nytimes.com/games/wordle/index.html");
+            }
+        });
 
         textViewHighscore = findViewById(R.id.text_view_highscore);
         spinnerDifficulty = findViewById(R.id.spinner_difficulty);
@@ -48,6 +59,11 @@ public class StartingScreenActivity extends AppCompatActivity {
                 startQuiz();
             }
         });
+    }
+
+    private void goLink(String s) { //Class to fetch URL online
+        Uri uri = Uri.parse(s);
+        startActivity(new Intent(Intent.ACTION_VIEW,uri));
     }
 
     private void startQuiz() {
