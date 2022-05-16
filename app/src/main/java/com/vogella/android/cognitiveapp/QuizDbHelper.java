@@ -17,14 +17,23 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "MyAwesomeQuiz.db";
     private static final int DATABASE_VERSION = 1;
 
+    private static QuizDbHelper instance;
+
     private SQLiteDatabase db;
 
-    public QuizDbHelper(Context context) {
+    private QuizDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public static synchronized QuizDbHelper getInstance(Context context) {
+        if (instance == null) {
+            instance = new QuizDbHelper(context.getApplicationContext());
+        }
+        return instance;
+    }
+
     @Override
-    public void onCreate(SQLiteDatabase db) { // Making tables
+    public void onCreate(SQLiteDatabase db) {
         this.db = db;
 
         final String SQL_CREATE_CATEGORIES_TABLE = "CREATE TABLE " +
@@ -34,9 +43,9 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 ")";
 
         final String SQL_CREATE_QUESTIONS_TABLE = "CREATE TABLE " +
-                QuizContract.QuestionsTable.TABLE_NAME + " ( " + //move back one if not work
-                QuizContract. QuestionsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                QuizContract. QuestionsTable.COLUMN_QUESTION + " TEXT, " +
+                QuizContract.QuestionsTable.TABLE_NAME + " ( " +
+                QuizContract.QuestionsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                QuizContract.QuestionsTable.COLUMN_QUESTION + " TEXT, " +
                 QuizContract.QuestionsTable.COLUMN_OPTION1 + " TEXT, " +
                 QuizContract.QuestionsTable.COLUMN_OPTION2 + " TEXT, " +
                 QuizContract.QuestionsTable.COLUMN_OPTION3 + " TEXT, " +
@@ -45,10 +54,10 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 QuizContract.QuestionsTable.COLUMN_CATEGORY_ID + " INTEGER, " +
                 "FOREIGN KEY(" + QuizContract.QuestionsTable.COLUMN_CATEGORY_ID + ") REFERENCES " +
                 QuizContract.CategoriesTable.TABLE_NAME + "(" + QuizContract.CategoriesTable._ID + ")" + "ON DELETE CASCADE" +
-                ")"; //If category deleted, it deletes all questions tied to that ceteogory
+                ")";
 
-        db.execSQL(SQL_CREATE_CATEGORIES_TABLE); // execute and send
-        db.execSQL(SQL_CREATE_QUESTIONS_TABLE); // execute and send
+        db.execSQL(SQL_CREATE_CATEGORIES_TABLE);
+        db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
         fillCategoriesTable();
         fillQuestionsTable();
     }
@@ -66,29 +75,27 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.setForeignKeyConstraintsEnabled(true);
     }
 
-    private void fillCategoriesTable(){  //Drop down menu
+    private void fillCategoriesTable() {
         Category c1 = new Category("Programming");
         addCategory(c1);
         Category c2 = new Category("Geography");
         addCategory(c2);
-        Category c3 = new Category("Maths");
+        Category c3 = new Category("Math");
         addCategory(c3);
     }
 
-    // pass category
-    private void addCategory(Category category){
+    private void addCategory(Category category) {
         ContentValues cv = new ContentValues();
         cv.put(QuizContract.CategoriesTable.COLUMN_NAME, category.getName());
         db.insert(QuizContract.CategoriesTable.TABLE_NAME, null, cv);
     }
 
-
     private void fillQuestionsTable() {
-        Question q1 = new Question("Prog, Easy: A is correct",
+        Question q1 = new Question("Programming, Easy: A is correct",
                 "A", "B", "C", 1,
                 Question.DIFFICULTY_EASY, Category.PROGRAMMING);
         addQuestion(q1);
-        Question q2 = new Question("Geog, Medium: B is correct",
+        Question q2 = new Question("Geography, Medium: B is correct",
                 "A", "B", "C", 2,
                 Question.DIFFICULTY_MEDIUM, Category.GEOGRAPHY);
         addQuestion(q2);
@@ -97,18 +104,17 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 Question.DIFFICULTY_HARD, Category.MATH);
         addQuestion(q3);
         Question q4 = new Question("Math, Easy: A is correct",
-                "Buster", "Diggs", "Jack", 1,
+                "A", "B", "C", 1,
                 Question.DIFFICULTY_EASY, Category.MATH);
         addQuestion(q4);
         Question q5 = new Question("Non existing, Easy: A is correct",
                 "A", "B", "C", 1,
                 Question.DIFFICULTY_EASY, 4);
         addQuestion(q5);
-        Question q6 = new Question("Non existing, Easy: B is correct",
+        Question q6 = new Question("Non existing, Medium: B is correct",
                 "A", "B", "C", 2,
-                Question.DIFFICULTY_EASY, 5);
+                Question.DIFFICULTY_MEDIUM, 5);
         addQuestion(q6);
-
     }
 
     private void addQuestion(Question question) {
@@ -121,6 +127,24 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         cv.put(QuizContract.QuestionsTable.COLUMN_DIFFICULTY, question.getDifficulty());
         cv.put(QuizContract.QuestionsTable.COLUMN_CATEGORY_ID, question.getCategoryID());
         db.insert(QuizContract.QuestionsTable.TABLE_NAME, null, cv);
+    }
+
+    public List<Category> getAllCategories() {
+        List<Category> categoryList = new ArrayList<>();
+        db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + QuizContract.CategoriesTable.TABLE_NAME, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Category category = new Category();
+                category.setId(c.getInt(c.getColumnIndex(QuizContract.CategoriesTable._ID)));
+                category.setName(c.getString(c.getColumnIndex(QuizContract.CategoriesTable.COLUMN_NAME)));
+                categoryList.add(category);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        return categoryList;
     }
 
     public ArrayList<Question> getAllQuestions() {
@@ -147,13 +171,23 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         return questionList;
     }
 
-    public ArrayList<Question> getQuestions(String difficulty) {
+    public ArrayList<Question> getQuestions(int categoryID, String difficulty) {
         ArrayList<Question> questionList = new ArrayList<>();
         db = getReadableDatabase();
 
-        String[] selectionArgs = new String[]{difficulty};
-        Cursor c = db.rawQuery("SELECT * FROM " + QuizContract.QuestionsTable.TABLE_NAME +
-                " WHERE " + QuizContract.QuestionsTable.COLUMN_DIFFICULTY + " = ?", selectionArgs);
+        String selection = QuizContract.QuestionsTable.COLUMN_CATEGORY_ID + " = ? " +
+                " AND " + QuizContract.QuestionsTable.COLUMN_DIFFICULTY + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(categoryID), difficulty};
+
+        Cursor c = db.query(
+                QuizContract.QuestionsTable.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
 
         if (c.moveToFirst()) {
             do {

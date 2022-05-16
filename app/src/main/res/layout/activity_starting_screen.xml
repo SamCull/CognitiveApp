@@ -19,6 +19,7 @@
         android:textColor="@android:color/black"
         android:textSize="35sp" />
 
+
     <TextView
         android:id="@+id/text_view_highscore"
         android:layout_width="wrap_content"
@@ -29,6 +30,18 @@
         android:text="Highscore: 0"
         android:textSize="20sp" />
 
+
+    <TextView
+        android:id="@+id/text_view_profileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/text_view_highscore"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="222dp"
+        android:layout_marginBottom="87dp"
+        android:text="Sample name"
+        android:textSize="20sp" />
+
     <Button
         android:id="@+id/button_start_quiz"
         android:layout_width="wrap_content"
@@ -36,25 +49,22 @@
         android:layout_centerInParent="true"
         android:text="Start Quiz" />
 
-    <Button
-        android:id="@+id/button_start_wordle"
+    <Spinner
+        android:id="@+id/spinner_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_start_quiz"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="Start Wordle" />
+        android:layout_alignStart="@+id/button_start_quiz"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="48dp" />
 
     <Spinner
         android:id="@+id/spinner_difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button_start_quiz"
+        android:layout_below="@+id/spinner_category"
         android:layout_alignStart="@+id/button_start_quiz"
-        android:layout_marginStart="139dp"
-        android:layout_marginTop="-35dp" />
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="-64dp" />
 
 </RelativeLayout>

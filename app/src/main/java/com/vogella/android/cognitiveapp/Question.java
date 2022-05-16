@@ -20,8 +20,8 @@ public class Question implements Parcelable {
     public Question() {
     }
 
-    public Question(String question, String option1, String option2,
-                    String option3, int answerNr, String difficulty, int categoryID) {
+    public Question(String question, String option1, String option2, String option3,
+                    int answerNr, String difficulty, int categoryID) {
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
@@ -139,7 +139,7 @@ public class Question implements Parcelable {
         return new String[]{
                 DIFFICULTY_EASY,
                 DIFFICULTY_MEDIUM,
-                DIFFICULTY_HARD,
+                DIFFICULTY_HARD
         };
     }
 } //end class
