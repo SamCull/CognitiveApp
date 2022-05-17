@@ -1,14 +1,14 @@
 package com.vogella.android.cognitiveapp;
 
 public class Category {
-    public static final int PROGRAMMING = 1; //change
-    public static final int GEOGRAPHY = 2; // change
+    public static final int History = 1;
+    public static final int GEOGRAPHY = 2;
     public static final int MATH = 3;
 
     private int id;
     private String name;
 
-    public Category(){
+    public Category() {
     }
 
     public Category(String name) {
@@ -29,5 +29,10 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

@@ -71,8 +71,18 @@
         android:layout_height="70dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="142dp"
-        android:layout_marginBottom="93dp"
+        android:layout_marginEnd="211dp"
+        android:layout_marginBottom="92dp"
         android:text="Start Wordle" />
+
+    <Button
+        android:id="@+id/button_start_game"
+        android:layout_width="123dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="90dp"
+        android:text="Start Game" />
 
 </RelativeLayout>
