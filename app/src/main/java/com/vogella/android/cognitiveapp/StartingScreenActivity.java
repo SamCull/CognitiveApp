@@ -30,14 +30,24 @@ public class StartingScreenActivity extends AppCompatActivity {
 
     private int highscore;
 
+    Button button_start_wordle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting_screen);
 
+        button_start_wordle = findViewById(R.id.button_start_wordle);
         textViewHighscore = findViewById(R.id.text_view_highscore);
         spinnerCategory = findViewById(R.id.spinner_category);
         spinnerDifficulty = findViewById(R.id.spinner_difficulty);
+
+        button_start_wordle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goLink("https://www.nytimes.com/games/wordle/index.html");
+            }
+        });
 
         loadCategories();
         loadDifficultyLevels();
@@ -50,6 +60,11 @@ public class StartingScreenActivity extends AppCompatActivity {
                 startQuiz();
             }
         });
+    }
+
+    private void goLink(String s) {
+        Uri uri = Uri.parse(s);
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 
     private void startQuiz() {

@@ -10,6 +10,7 @@
     tools:context=".StartingScreenActivity">
 
         <!-- Title -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,20 +28,19 @@
         android:layout_above="@id/button_start_quiz"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
-        android:text="Highscore: 0"
+        android:text="Quiz Highscore: 0"
         android:textSize="20sp" />
-
 
     <TextView
         android:id="@+id/text_view_profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/text_view_highscore"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="222dp"
-        android:layout_marginBottom="87dp"
-        android:text="Sample name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:text="Welcome, username"
         android:textSize="20sp" />
+
 
     <Button
         android:id="@+id/button_start_quiz"
@@ -53,18 +53,26 @@
         android:id="@+id/spinner_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button_start_quiz"
         android:layout_alignStart="@+id/button_start_quiz"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="48dp" />
+        android:layout_below="@+id/button_start_quiz"
+        android:layout_marginTop="16dp" />
 
     <Spinner
         android:id="@+id/spinner_difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_category"
         android:layout_alignStart="@+id/button_start_quiz"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="-64dp" />
+        android:layout_below="@+id/spinner_category"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/button_start_wordle"
+        android:layout_width="99dp"
+        android:layout_height="58dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="90dp"
+        android:text="Start Wordle" />
 
 </RelativeLayout>
