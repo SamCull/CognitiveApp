@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public class QuizActivity extends AppCompatActivity {
     public static final String EXTRA_SCORE = "extraScore";
-    private static final long COUNTDOWN_IN_MILLIS = 30000;
+    private static final long COUNTDOWN_IN_MILLIS = 15000;
 
     private static final String KEY_SCORE = "keyScore";
     private static final String KEY_QUESTION_COUNT = "keyQuestionCount";
@@ -177,7 +177,7 @@ public class QuizActivity extends AppCompatActivity {
 
         textViewCountDown.setText(timeFormatted);
 
-        if (timeLeftInMillis < 10000) {
+        if (timeLeftInMillis < 5000) {
             textViewCountDown.setTextColor(Color.RED);
         } else {
             textViewCountDown.setTextColor(textColorDefaultCd);

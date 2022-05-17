@@ -38,7 +38,7 @@
         android:layout_above="@id/text_view_highscore"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
-        android:text="Welcome, username"
+        android:text="Welcome, username!"
         android:textSize="20sp" />
 
 
@@ -67,12 +67,12 @@
 
     <Button
         android:id="@+id/button_start_wordle"
-        android:layout_width="99dp"
-        android:layout_height="58dp"
+        android:layout_width="123dp"
+        android:layout_height="70dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="90dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginBottom="93dp"
         android:text="Start Wordle" />
 
 </RelativeLayout>

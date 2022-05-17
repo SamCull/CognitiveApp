@@ -5,11 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.vogella.android.cognitiveapp.*;
 
-import androidx.annotation.Nullable;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +72,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     private void fillCategoriesTable() {
-        Category c1 = new Category("Programming");
+        Category c1 = new Category("History");
         addCategory(c1);
         Category c2 = new Category("Geography");
         addCategory(c2);
@@ -91,30 +87,39 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     private void fillQuestionsTable() {
-        Question q1 = new Question("Programming, Easy: A is correct",
-                "A", "B", "C", 1,
-                Question.DIFFICULTY_EASY, Category.PROGRAMMING);
+        Question q1 = new Question("Where was the titanic headed to before sinking?",
+                "The USA", "Ireland", "Japan", 1,
+                Question.DIFFICULTY_EASY, Category.History);
         addQuestion(q1);
-        Question q2 = new Question("Geography, Medium: B is correct",
-                "A", "B", "C", 2,
-                Question.DIFFICULTY_MEDIUM, Category.GEOGRAPHY);
+        Question q2 = new Question("Who was the leader of Russia during the World War II?",
+                "Vladimir Putin", "Adolf Hitler", "Michael Collins", 1,
+                Question.DIFFICULTY_EASY, Category.History);
         addQuestion(q2);
-        Question q3 = new Question("Math, Hard: C is correct",
-                "A", "B", "C", 3,
-                Question.DIFFICULTY_HARD, Category.MATH);
+        Question q3 = new Question("Who was the President of South Africa between 1994 to 1999?",
+                "Cyril Ramaphosa", "Nelson Mandela", "Jacob Zuma", 2,
+                Question.DIFFICULTY_MEDIUM, Category.History);
         addQuestion(q3);
-        Question q4 = new Question("Math, Easy: A is correct",
-                "A", "B", "C", 1,
-                Question.DIFFICULTY_EASY, Category.MATH);
+        Question q4 = new Question("Which war started in 1939 and ended in 1945?",
+                "World War II", "The Vietnam War", "World War I", 1,
+                Question.DIFFICULTY_MEDIUM, Category.History);
         addQuestion(q4);
-        Question q5 = new Question("Non existing, Easy: A is correct",
-                "A", "B", "C", 1,
-                Question.DIFFICULTY_EASY, 4);
+        Question q5 = new Question("What color was the Statue of Liberty originally?",
+                "Yellow", "Green", "Copper", 3,
+                Question.DIFFICULTY_HARD, Category.History);
         addQuestion(q5);
-        Question q6 = new Question("Non existing, Medium: B is correct",
+        Question q6 = new Question("Who did Henry VIII first marry?",
+                "Meghan Markle", "Catherine of Aragon", "Kate Middleton", 2,
+                Question.DIFFICULTY_HARD, Category.History);
+        addQuestion(q6);
+
+        Question q7 = new Question("What is the largest ocean in the world?",
+                "Atlantic Ocean", "Artic Ocean", "The Pacific Ocean", 3,
+                Question.DIFFICULTY_EASY, Category.GEOGRAPHY);
+        addQuestion(q7);
+        Question q8 =new Question("Non existing, Medium: B is correct",
                 "A", "B", "C", 2,
                 Question.DIFFICULTY_MEDIUM, 5);
-        addQuestion(q6);
+        addQuestion(q8);
     }
 
     private void addQuestion(Question question) {
