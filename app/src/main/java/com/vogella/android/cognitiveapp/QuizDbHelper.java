@@ -87,40 +87,234 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     private void fillQuestionsTable() {
+                                        // HISTORY | EASY //
         Question q1 = new Question("Where was the titanic headed to before sinking?",
-                "The USA", "Ireland", "Japan", 1,
+                "Japan", "Ireland", "USA", 3,
                 Question.DIFFICULTY_EASY, Category.History);
         addQuestion(q1);
         Question q2 = new Question("Who was the leader of Russia during the World War II?",
-                "Vladimir Putin", "Adolf Hitler", "Michael Collins", 1,
+                "Josef Stalin", "Adolf Hitler", "Michael Collins", 1,
                 Question.DIFFICULTY_EASY, Category.History);
         addQuestion(q2);
-        Question q3 = new Question("Who was the President of South Africa between 1994 to 1999?",
-                "Cyril Ramaphosa", "Nelson Mandela", "Jacob Zuma", 2,
-                Question.DIFFICULTY_MEDIUM, Category.History);
+        Question q3 = new Question("What day is Christmas day in Ireland?",
+                "25th October", "25th December", "25th November", 2,
+                Question.DIFFICULTY_EASY, Category.History);
         addQuestion(q3);
-        Question q4 = new Question("Which war started in 1939 and ended in 1945?",
-                "World War II", "The Vietnam War", "World War I", 1,
-                Question.DIFFICULTY_MEDIUM, Category.History);
+        Question q4 = new Question("Who was president of the USA during the Cuban Missile Crisis?",
+                "Barack Obama", "John F. Kennedy", "Donald Trump", 2,
+                Question.DIFFICULTY_EASY, Category.History);
         addQuestion(q4);
-        Question q5 = new Question("What color was the Statue of Liberty originally?",
+        Question q5 = new Question("Which ancient people built the pyramids?",
+                "The Irish", "The Cavemen", "The Egyptians", 3,
+                Question.DIFFICULTY_EASY, Category.History);
+        addQuestion(q5);
+        Question q6 = new Question("Which town was Jesus born?",
+                "Medina", "Bethelehem", "Vatican City", 2,
+                Question.DIFFICULTY_EASY, Category.History);
+        addQuestion(q6);
+        Question q7 = new Question("Who first stepped on the mood?",
+                "Neil Armstrong", "Christopher Columbus", "Buzz Lightyear", 1,
+                Question.DIFFICULTY_EASY, Category.History);
+        addQuestion(q7);
+        Question q8 = new Question("Which of the following wars came first?",
+                "World War II", "The Vietnam War", "World War I", 3,
+                Question.DIFFICULTY_EASY, Category.History);
+        addQuestion(q8);
+        Question q9 = new Question("Who invented the lightbulb?",
+                "Thomas Edison", "Alexander Graham Bell", "John Peirce", 1,
+                Question.DIFFICULTY_EASY, Category.History);
+        addQuestion(q9);
+        Question q10 = new Question("Who was the leader of the Nazi Party?",
+                "Winston Churchill", "Adolf Hitler", "Vladimir Putin", 2,
+                Question.DIFFICULTY_EASY, Category.History);
+        addQuestion(q10);
+                                        // HISTORY | MEDIUM //
+
+        Question q11 = new Question("What sank the SS Titanic?",
+                "A storm", "An iceberg", "A lightning strike", 2,
+                Question.DIFFICULTY_MEDIUM, Category.History);
+        addQuestion(q11);
+        Question q12 = new Question("Which country gifted the Statue of Liberty?",
+                "Spain", "Italy", "France", 3,
+                Question.DIFFICULTY_MEDIUM, Category.History);
+        addQuestion(q12);
+        Question q13 = new Question("Which country first used paper money?",
+                "China", "Russia", "Spain", 1,
+                Question.DIFFICULTY_MEDIUM, Category.History);
+        addQuestion(q13);
+        Question q14 = new Question("Which city was destroyed by Mt. Vesuvies?",
+                "Alexandria", "Rome", "Pompeii", 2,
+                Question.DIFFICULTY_MEDIUM, Category.History);
+        addQuestion(q14);
+        Question q15 = new Question("Who said 'I have a dream' ?",
+                "Martin Luther King", "Ghandhi", "Joe Biden", 1,
+                Question.DIFFICULTY_MEDIUM, Category.History);
+        addQuestion(q15);
+
+                                        // HISTORY | HARD //
+        Question q16 = new Question("What color was the Statue of Liberty originally?",
                 "Yellow", "Green", "Copper", 3,
                 Question.DIFFICULTY_HARD, Category.History);
-        addQuestion(q5);
-        Question q6 = new Question("Who did Henry VIII first marry?",
+        addQuestion(q16);
+        Question q17 = new Question("Who did Henry VIII first marry?",
                 "Meghan Markle", "Catherine of Aragon", "Kate Middleton", 2,
                 Question.DIFFICULTY_HARD, Category.History);
-        addQuestion(q6);
+        addQuestion(q17);
+        Question q18 = new Question("Who painted the Mona Lisa?",
+                "Leonardo da Vinci", "Michelangelo", "Vincent van Gogh", 1,
+                Question.DIFFICULTY_HARD, Category.History);
+        addQuestion(q18);
+        Question q19 = new Question("What came after the Bronze Age?",
+                "The Silver Age", "The Stone Age", "The Iron Age", 3,
+                Question.DIFFICULTY_HARD, Category.History);
+        addQuestion(q19);
+        Question q20 = new Question(" According to popular myth, who chased all the snakes out of Ireland?",
+                "St Dunne", "St Patrick", "St Peters", 2,
+                Question.DIFFICULTY_HARD, Category.History);
+        addQuestion(q20);
 
-        Question q7 = new Question("What is the largest ocean in the world?",
+        // GEOGRAPHY | EASY //
+        Question q21 = new Question("What is the largest ocean in the world?",
                 "Atlantic Ocean", "Artic Ocean", "The Pacific Ocean", 3,
                 Question.DIFFICULTY_EASY, Category.GEOGRAPHY);
-        addQuestion(q7);
-        Question q8 =new Question("Non existing, Medium: B is correct",
-                "A", "B", "C", 2,
-                Question.DIFFICULTY_MEDIUM, 5);
-        addQuestion(q8);
+        addQuestion(q21);
+        Question q22 = new Question("What country has the largest population in the world?",
+                "The USA", "Russia", "China", 3,
+                Question.DIFFICULTY_EASY, Category.GEOGRAPHY);
+        addQuestion(q22);
+        Question q23 = new Question("How many continents are in the world",
+                "Six", "Seven", "Eight", 2,
+                Question.DIFFICULTY_EASY, Category.GEOGRAPHY);
+        addQuestion(q23);
+        Question q24 = new Question("What is the name of the largest country in the world?",
+                "Russia", "Spain", "China", 1,
+                Question.DIFFICULTY_EASY, Category.GEOGRAPHY);
+        addQuestion(q24);
+        Question q25 = new Question("What is the name of the largest mountain in the world?",
+                "Mt Leinster", "Mt Everest", "Mt Vesuvius", 2,
+                Question.DIFFICULTY_EASY, Category.GEOGRAPHY);
+        addQuestion(q25);
+
+                                        // GEOGRAPHY | MEDIUM //
+        Question q26 = new Question("What country has the largest population in the world?",
+                "The USA", "Russia", "China", 3,
+                Question.DIFFICULTY_MEDIUM, Category.GEOGRAPHY);
+        addQuestion(q26);
+        Question q27 = new Question("Where is the Eiffel Tower located?",
+                "France", "Italy", "England", 1,
+                Question.DIFFICULTY_MEDIUM, Category.GEOGRAPHY);
+        addQuestion(q27);
+        Question q28 = new Question("What is the coldest place on Earth?",
+                "Russia", "Antartica", "India", 2,
+                Question.DIFFICULTY_MEDIUM, Category.GEOGRAPHY);
+        addQuestion(q28);
+        Question q29 = new Question("What country lies above Mexico?",
+                "Brazil", "The USA", "Canada", 2,
+                Question.DIFFICULTY_MEDIUM, Category.GEOGRAPHY);
+        addQuestion(q29);
+        Question q30 = new Question("What planet is closest to Earth?",
+                "Mercury", "Saturn", "Venus", 3,
+                Question.DIFFICULTY_MEDIUM, Category.GEOGRAPHY);
+        addQuestion(q30);
+
+
+                                        // GEOGRAPHY | HARD //
+        Question q31 = new Question("How many countries are there in the UK?",
+                "Five", "Three", "Four", 3,
+                Question.DIFFICULTY_HARD, Category.GEOGRAPHY);
+        addQuestion(q31);
+        Question q32 = new Question("What is the capital of Nova Scotia",
+                "Nova Scotia", "Quebec City", "Ottowa", 1,
+                Question.DIFFICULTY_HARD, Category.GEOGRAPHY);
+        addQuestion(q32);
+        Question q33 = new Question("What season does Australia experience in December?",
+                "Winter", "Summer", "Spring", 2,
+                Question.DIFFICULTY_HARD, Category.GEOGRAPHY);
+        addQuestion(q33);
+        Question q34 = new Question("What is the driest continent on Earth?",
+                "Europe", "Antartica", "Asia", 2,
+                Question.DIFFICULTY_HARD, Category.GEOGRAPHY);
+        addQuestion(q34);
+        Question q35 = new Question("Mt Fuji is the highest point located in which Asian country?",
+                "China", "India", "Japan", 3,
+                Question.DIFFICULTY_HARD, Category.GEOGRAPHY);
+        addQuestion(q35);
+
+
+                                     // MATH | EASY //
+        Question q36 = new Question("What is 10 + 15?",
+                "30", "25", "20", 2,
+                Question.DIFFICULTY_EASY, Category.MATH);
+        addQuestion(q36);
+        Question q37 = new Question("What is 13+17?",
+                "30", "29", "31", 1,
+                Question.DIFFICULTY_EASY, Category.MATH);
+        addQuestion(q37);
+        Question q38 = new Question("What is 20-13?",
+                "9", "6", "7", 3,
+                Question.DIFFICULTY_EASY, Category.MATH);
+        addQuestion(q38);
+        Question q39 = new Question("What is 5+12-7?",
+                "10", "12", "11", 1,
+                Question.DIFFICULTY_EASY, Category.MATH);
+        addQuestion(q39);
+        Question q40 = new Question("What is 30-15?",
+                "10", "20", "15", 3,
+                Question.DIFFICULTY_EASY, Category.MATH);
+        addQuestion(q40);
+
+                                        // MATH | MEDIUM //
+        Question q41 = new Question("How many lives are cats said to have?",
+                "8", "9", "10", 2,
+                Question.DIFFICULTY_MEDIUM, Category.MATH);
+        addQuestion(q41);
+        Question q42 = new Question("What is the only even prime number?",
+                "0", "1", "2", 3,
+                Question.DIFFICULTY_MEDIUM, Category.MATH);
+        addQuestion(q42);
+        Question q43 = new Question("How many cupcakes are in a baker's dozen? ",
+                "13", "12", "10", 1,
+                Question.DIFFICULTY_MEDIUM, Category.MATH);
+        addQuestion(q43);
+        Question q44 = new Question("What is 5 x 12?",
+                "55", "65", "75", 2,
+                Question.DIFFICULTY_MEDIUM, Category.MATH);
+        addQuestion(q44);
+        Question q45 = new Question("What is 81 / 9?",
+                "5", "11", "9", 3,
+                Question.DIFFICULTY_MEDIUM, Category.MATH);
+        addQuestion(q45);
+
+                                        // MATH | HARD //
+        Question q46 = new Question("What letter does every odd number have in it?",
+                "A", "E", "O", 2,
+                Question.DIFFICULTY_HARD, Category.MATH);
+        addQuestion(q46);
+        Question q47 = new Question("What is the name of an angle of less than 90 degrees?",
+                "Right Angle", "Obtuse", "Acute angle", 3,
+                Question.DIFFICULTY_HARD, Category.MATH);
+        addQuestion(q47);
+        Question q48 = new Question("What is the next prime number after 7?",
+                "11", "13", "9", 1,
+                Question.DIFFICULTY_HARD, Category.MATH);
+        addQuestion(q48);
+        Question q49 = new Question("What is (5 x 10) / 2?",
+                "100", "25", "50", 2,
+                Question.DIFFICULTY_HARD, Category.MATH);
+        addQuestion(q49);
+        Question q50 = new Question("What is 25% of 200?",
+                "75", "125", "50", 3,
+                Question.DIFFICULTY_HARD, Category.MATH);
+        addQuestion(q50);
+
+
     }
+
+
+
+
+
+
 
     private void addQuestion(Question question) {
         ContentValues cv = new ContentValues();
