@@ -28,9 +28,9 @@ public class StartingScreenActivity extends AppCompatActivity {
     private Spinner spinnerCategory;
     private Spinner spinnerDifficulty;
 
-    private int highscore;
+    public int highscore;
 
-    Button button_start_wordle;
+    Button button_start_wordle, button_start_suduko;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class StartingScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_starting_screen);
 
         button_start_wordle = findViewById(R.id.button_start_wordle);
+        button_start_suduko = findViewById(R.id.button_start_suduko);
         textViewHighscore = findViewById(R.id.text_view_highscore);
         spinnerCategory = findViewById(R.id.spinner_category);
         spinnerDifficulty = findViewById(R.id.spinner_difficulty);
@@ -48,10 +49,16 @@ public class StartingScreenActivity extends AppCompatActivity {
                 goLink("https://www.nytimes.com/games/wordle/index.html");
             }
         });
+        button_start_suduko.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goLink("https://sudoku.com/");
+            }
+        });
 
         loadCategories();
         loadDifficultyLevels();
-        loadHighscore();
+        loadHighscore(); // keep
 
         Button buttonStartQuiz = findViewById(R.id.button_start_quiz);
         buttonStartQuiz.setOnClickListener(new View.OnClickListener() {

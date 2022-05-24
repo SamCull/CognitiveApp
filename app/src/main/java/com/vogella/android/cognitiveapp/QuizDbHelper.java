@@ -5,12 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import com.vogella.android.cognitiveapp.QuizContract.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuizDbHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "MyAwesomeQuiz.db";
+    private static final String DATABASE_NAME = "CognitiveAppDatabase.db";
     private static final int DATABASE_VERSION = 1;
 
     private static QuizDbHelper instance;
@@ -31,6 +32,17 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         this.db = db;
+
+        final String SQL_CREATE_SCORE_TABLE = "CREATE TABLE " +
+                QuizContract.ScoreTable.TABLE_NAME + "( " +
+                QuizContract.ScoreTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                QuizContract.ScoreTable.COLUMN_QUESTION + " TEXT, " +
+                QuizContract.ScoreTable.COLUMN_ANSWER_NR + " TEXT, " +
+                QuizContract.ScoreTable.COLUMN_DIFFICULTY + " TEXT, " +
+                QuizContract.ScoreTable.COLUMN_CATEGORY_ID + " TEXT, " +
+                QuizContract.ScoreTable.COLUMN_SCORE + " TEXT " +
+                ")";
+
 
         final String SQL_CREATE_CATEGORIES_TABLE = "CREATE TABLE " +
                 QuizContract.CategoriesTable.TABLE_NAME + "( " +
@@ -54,6 +66,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_CREATE_CATEGORIES_TABLE);
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
+        //db.execSQL(SQL_CREATE_SCORE_TABLE);
         fillCategoriesTable();
         fillQuestionsTable();
     }
@@ -62,6 +75,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + QuizContract.CategoriesTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + QuizContract.QuestionsTable.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + QuizContract.ScoreTable.TABLE_NAME);
         onCreate(db);
     }
 
@@ -78,6 +92,9 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         addCategory(c2);
         Category c3 = new Category("Math");
         addCategory(c3);
+    }
+    private void fillScoresTable(){
+
     }
 
     private void addCategory(Category category) {
@@ -309,10 +326,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
 
     }
-
-
-
-
 
 
 

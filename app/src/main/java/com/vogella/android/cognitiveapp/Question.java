@@ -16,6 +16,7 @@ public class Question implements Parcelable {
     private int answerNr;
     private String difficulty;
     private int categoryID;
+    private int score;
 
     public Question() {
     }
@@ -29,7 +30,9 @@ public class Question implements Parcelable {
         this.answerNr = answerNr;
         this.difficulty = difficulty;
         this.categoryID = categoryID;
+
     }
+
 
     protected Question(Parcel in) {
         id = in.readInt();
