@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="homepagetext">#FF0000</color>
+    <color name="red">#F44336</color>
 
-    <color name="colorBackround">#A48FE8</color> # a48fe8
+    <color name="colorBackround">#123456</color> # a48fe8
 </resources>
