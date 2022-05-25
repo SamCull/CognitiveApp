@@ -33,7 +33,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         this.db = db;
 
-        final String SQL_CREATE_SCORE_TABLE = "CREATE TABLE " +
+/*        final String SQL_CREATE_SCORE_TABLE = "CREATE TABLE " +
                 QuizContract.ScoreTable.TABLE_NAME + "( " +
                 QuizContract.ScoreTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 QuizContract.ScoreTable.COLUMN_QUESTION + " TEXT, " +
@@ -41,7 +41,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 QuizContract.ScoreTable.COLUMN_DIFFICULTY + " TEXT, " +
                 QuizContract.ScoreTable.COLUMN_CATEGORY_ID + " TEXT, " +
                 QuizContract.ScoreTable.COLUMN_SCORE + " TEXT " +
-                ")";
+                ")"; */
 
 
         final String SQL_CREATE_CATEGORIES_TABLE = "CREATE TABLE " +
@@ -75,7 +75,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + QuizContract.CategoriesTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + QuizContract.QuestionsTable.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + QuizContract.ScoreTable.TABLE_NAME);
+        //db.execSQL("DROP TABLE IF EXISTS " + QuizContract.ScoreTable.TABLE_NAME);
         onCreate(db);
     }
 
@@ -104,7 +104,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     private void fillQuestionsTable() {
-                                        // HISTORY | EASY //
+        // HISTORY | EASY //
         Question q1 = new Question("Where was the titanic headed to before sinking?",
                 "Japan", "Ireland", "USA", 3,
                 Question.DIFFICULTY_EASY, Category.History);
@@ -145,7 +145,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 "Winston Churchill", "Adolf Hitler", "Vladimir Putin", 2,
                 Question.DIFFICULTY_EASY, Category.History);
         addQuestion(q10);
-                                        // HISTORY | MEDIUM //
+        // HISTORY | MEDIUM //
 
         Question q11 = new Question("What sank the SS Titanic?",
                 "A storm", "An iceberg", "A lightning strike", 2,
@@ -168,7 +168,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 Question.DIFFICULTY_MEDIUM, Category.History);
         addQuestion(q15);
 
-                                        // HISTORY | HARD //
+        // HISTORY | HARD //
         Question q16 = new Question("What color was the Statue of Liberty originally?",
                 "Yellow", "Green", "Copper", 3,
                 Question.DIFFICULTY_HARD, Category.History);
@@ -212,7 +212,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 Question.DIFFICULTY_EASY, Category.GEOGRAPHY);
         addQuestion(q25);
 
-                                        // GEOGRAPHY | MEDIUM //
+        // GEOGRAPHY | MEDIUM //
         Question q26 = new Question("What country has the largest population in the world?",
                 "The USA", "Russia", "China", 3,
                 Question.DIFFICULTY_MEDIUM, Category.GEOGRAPHY);
@@ -235,7 +235,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         addQuestion(q30);
 
 
-                                        // GEOGRAPHY | HARD //
+        // GEOGRAPHY | HARD //
         Question q31 = new Question("How many countries are there in the UK?",
                 "Five", "Three", "Four", 3,
                 Question.DIFFICULTY_HARD, Category.GEOGRAPHY);
@@ -258,7 +258,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         addQuestion(q35);
 
 
-                                     // MATH | EASY //
+        // MATH | EASY //
         Question q36 = new Question("What is 10 + 15?",
                 "30", "25", "20", 2,
                 Question.DIFFICULTY_EASY, Category.MATH);
@@ -280,7 +280,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 Question.DIFFICULTY_EASY, Category.MATH);
         addQuestion(q40);
 
-                                        // MATH | MEDIUM //
+        // MATH | MEDIUM //
         Question q41 = new Question("How many lives are cats said to have?",
                 "8", "9", "10", 2,
                 Question.DIFFICULTY_MEDIUM, Category.MATH);
@@ -302,7 +302,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 Question.DIFFICULTY_MEDIUM, Category.MATH);
         addQuestion(q45);
 
-                                        // MATH | HARD //
+        // MATH | HARD //
         Question q46 = new Question("What letter does every odd number have in it?",
                 "A", "E", "O", 2,
                 Question.DIFFICULTY_HARD, Category.MATH);

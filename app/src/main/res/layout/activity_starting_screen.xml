@@ -28,19 +28,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/button_start_quiz"
-
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="-176dp"
         android:text="Quiz Highscore: 0"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/text_view_profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/text_view_highscore"
         android:layout_marginBottom="-246dp"
         android:text="Welcome, username!"
-        android:textSize="20sp" />
+        android:textSize="20sp" /> -->
 
     <Button
         android:id="@+id/button_start_quiz"

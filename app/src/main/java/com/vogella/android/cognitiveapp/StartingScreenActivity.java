@@ -23,12 +23,14 @@ public class StartingScreenActivity extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String KEY_HIGHSCORE = "keyHighscore";
+    public static final String SCORE = "score";
 
     private TextView textViewHighscore;
     private Spinner spinnerCategory;
     private Spinner spinnerDifficulty;
 
     public int highscore;
+    public int score;
 
     Button button_start_wordle, button_start_suduko;
 
@@ -134,5 +136,10 @@ public class StartingScreenActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(KEY_HIGHSCORE, highscore);
         editor.apply();
+    }
+
+    private void saveHighscore(int scoreNew) {
+        score = scoreNew;
+
     }
 }
