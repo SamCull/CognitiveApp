@@ -32,7 +32,7 @@ public class StartingScreenActivity extends AppCompatActivity {
     public int highscore;
     public int score;
 
-    Button button_start_wordle, button_start_suduko;
+    private Button button_start_wordle, button_start_suduko, button_results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class StartingScreenActivity extends AppCompatActivity {
         textViewHighscore = findViewById(R.id.text_view_highscore);
         spinnerCategory = findViewById(R.id.spinner_category);
         spinnerDifficulty = findViewById(R.id.spinner_difficulty);
+        button_results = findViewById(R.id.button_results);
 
         button_start_wordle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +70,20 @@ public class StartingScreenActivity extends AppCompatActivity {
                 startQuiz();
             }
         });
+
+        Button button_results = findViewById(R.id.button_results);
+        button_results.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startResults();
+            }
+        });
+
+    }
+
+    private void startResults(){
+        Intent intent = new Intent(StartingScreenActivity.this, Results.class);
+        startActivityForResult(intent, REQUEST_CODE_QUIZ);
     }
 
     private void goLink(String s) {
