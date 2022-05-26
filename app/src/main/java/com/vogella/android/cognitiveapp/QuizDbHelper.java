@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
+
 import com.vogella.android.cognitiveapp.QuizContract.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +17,9 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CognitiveAppDatabase.db";
     private static final int DATABASE_VERSION = 1;
 
+
     private static QuizDbHelper instance;
+    private TextView textViewHighscore;
 
     private SQLiteDatabase db;
 
@@ -31,9 +36,10 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //textViewHighscore = textViewHighscore.findViewById(R.id.text_view_highscore);
         this.db = db;
 
-/*        final String SQL_CREATE_SCORE_TABLE = "CREATE TABLE " +
+        final String SQL_CREATE_SCORE_TABLE = "CREATE TABLE " +
                 QuizContract.ScoreTable.TABLE_NAME + "( " +
                 QuizContract.ScoreTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 QuizContract.ScoreTable.COLUMN_QUESTION + " TEXT, " +
@@ -41,7 +47,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 QuizContract.ScoreTable.COLUMN_DIFFICULTY + " TEXT, " +
                 QuizContract.ScoreTable.COLUMN_CATEGORY_ID + " TEXT, " +
                 QuizContract.ScoreTable.COLUMN_SCORE + " TEXT " +
-                ")"; */
+                ")";
 
 
         final String SQL_CREATE_CATEGORIES_TABLE = "CREATE TABLE " +
@@ -60,8 +66,10 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 QuizContract.QuestionsTable.COLUMN_ANSWER_NR + " INTEGER, " +
                 QuizContract.QuestionsTable.COLUMN_DIFFICULTY + " TEXT, " +
                 QuizContract.QuestionsTable.COLUMN_CATEGORY_ID + " INTEGER, " +
+                QuizContract.QuestionsTable.COLUMN_SCORE.toString() + " INTEGER, " +
                 "FOREIGN KEY(" + QuizContract.QuestionsTable.COLUMN_CATEGORY_ID + ") REFERENCES " +
                 QuizContract.CategoriesTable.TABLE_NAME + "(" + QuizContract.CategoriesTable._ID + ")" + "ON DELETE CASCADE" +
+
                 ")";
 
         db.execSQL(SQL_CREATE_CATEGORIES_TABLE);
@@ -331,14 +339,32 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
     private void addQuestion(Question question) {
         ContentValues cv = new ContentValues();
-        cv.put(QuizContract.QuestionsTable.COLUMN_QUESTION, question.getQuestion());
-        cv.put(QuizContract.QuestionsTable.COLUMN_OPTION1, question.getOption1());
-        cv.put(QuizContract.QuestionsTable.COLUMN_OPTION2, question.getOption2());
-        cv.put(QuizContract.QuestionsTable.COLUMN_OPTION3, question.getOption3());
-        cv.put(QuizContract.QuestionsTable.COLUMN_ANSWER_NR, question.getAnswerNr());
-        cv.put(QuizContract.QuestionsTable.COLUMN_DIFFICULTY, question.getDifficulty());
-        cv.put(QuizContract.QuestionsTable.COLUMN_CATEGORY_ID, question.getCategoryID());
+        cv.put(QuestionsTable.COLUMN_QUESTION, question.getQuestion());
+        cv.put(QuestionsTable.COLUMN_OPTION1, question.getOption1());
+        cv.put(QuestionsTable.COLUMN_OPTION2, question.getOption2());
+        cv.put(QuestionsTable.COLUMN_OPTION3, question.getOption3());
+        cv.put(QuestionsTable.COLUMN_ANSWER_NR, question.getAnswerNr());
+        cv.put(QuestionsTable.COLUMN_DIFFICULTY, question.getDifficulty());
+        cv.put(QuestionsTable.COLUMN_CATEGORY_ID, question.getCategoryID());
+        cv.put(QuestionsTable.COLUMN_SCORE, question.getCategoryID());
         db.insert(QuizContract.QuestionsTable.TABLE_NAME, null, cv);
+        //db.update(QuestionsTable._ID, cv, "_id = ?", new String[]{});
+    }
+
+    public ArrayList<ScoreTable> getScore(){
+        ArrayList<ScoreTable> scoreList = new ArrayList<>();
+        db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + ScoreTable.TABLE_NAME, null);
+
+        if(c.moveToFirst()) {
+            do {
+                ScoreTable scoretable = new ScoreTable();
+                scoretable.getClass();
+                scoreList.add(scoretable);
+            } while (c.moveToNext());
+        }
+        c.close();
+        return scoreList;
     }
 
     public List<Category> getAllCategories() {
@@ -349,8 +375,8 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Category category = new Category();
-                category.setId(c.getInt(c.getColumnIndex(QuizContract.CategoriesTable._ID)));
-                category.setName(c.getString(c.getColumnIndex(QuizContract.CategoriesTable.COLUMN_NAME)));
+                category.setId(c.getInt(c.getColumnIndex(CategoriesTable._ID)));
+                category.setName(c.getString(c.getColumnIndex(CategoriesTable.COLUMN_NAME)));
                 categoryList.add(category);
             } while (c.moveToNext());
         }
@@ -362,19 +388,20 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     public ArrayList<Question> getAllQuestions() {
         ArrayList<Question> questionList = new ArrayList<>();
         db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + QuizContract.QuestionsTable.TABLE_NAME, null);
+        Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null);
 
         if (c.moveToFirst()) {
             do {
                 Question question = new Question();
-                question.setId(c.getInt(c.getColumnIndex(QuizContract.QuestionsTable._ID)));
-                question.setQuestion(c.getString(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_QUESTION)));
-                question.setOption1(c.getString(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_OPTION1)));
-                question.setOption2(c.getString(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_OPTION2)));
-                question.setOption3(c.getString(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_OPTION3)));
-                question.setAnswerNr(c.getInt(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_ANSWER_NR)));
-                question.setDifficulty(c.getString(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_DIFFICULTY)));
-                question.setCategoryID(c.getInt(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_CATEGORY_ID)));
+                question.setId(c.getInt(c.getColumnIndex(QuestionsTable._ID)));
+                question.setQuestion(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION3)));
+                question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_ANSWER_NR)));
+                question.setDifficulty(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_DIFFICULTY)));
+                question.setCategoryID(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_CATEGORY_ID)));
+                question.setScore(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_SCORE)));
                 questionList.add(question);
             } while (c.moveToNext());
         }
@@ -401,6 +428,12 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 null
         );
 
+        //if (c.getCount() == 1) {
+           // String mytext = c.getString(c.getColumnIndex("score"));
+            //textViewHighscore.setText(textViewHighscore.getText());
+        //}
+        //c.close();
+
         if (c.moveToFirst()) {
             do {
                 Question question = new Question();
@@ -412,6 +445,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 question.setAnswerNr(c.getInt(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_ANSWER_NR)));
                 question.setDifficulty(c.getString(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_DIFFICULTY)));
                 question.setCategoryID(c.getInt(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_CATEGORY_ID)));
+                question.setScore(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_SCORE)));
                 questionList.add(question);
             } while (c.moveToNext());
         }
@@ -419,4 +453,14 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         c.close();
         return questionList;
     }
+
+        //              Retrieve Data
+    /*public ArrayList<String> getUsers(){
+        ArrayList<String> list = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(get)
+    }*/
+
+
+
 }
